@@ -1,8 +1,12 @@
 package com.domhub.api.service;
 
 import com.domhub.api.model.Notification;
+import com.domhub.api.model.Notification.NotificationType;
 import com.domhub.api.dto.request.NotificationRequest;
 import com.domhub.api.repository.NotificationRepository;
+
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,6 +44,15 @@ public class NotificationService {
         } catch (Exception e) {
             return "Notification creation failed: " + e.getMessage();
         }
+    }
+    
+    public Notification getNotificationById(Integer id) {
+        Optional<Notification> notification = notificationRepository.findById(id);
+        return notification.orElse(null);
+    }
+    
+    public List<Notification> getNotificationsByType(NotificationType type) {
+        return notificationRepository.findByType(type);
     }
 }
 

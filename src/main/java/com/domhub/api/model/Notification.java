@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.time.LocalDate;
 
+import com.domhub.api.model.Notification.NotificationType;
+
 @Entity
 @Table(name = "notification")
 @Getter

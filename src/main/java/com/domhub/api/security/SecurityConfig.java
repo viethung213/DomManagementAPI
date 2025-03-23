@@ -40,6 +40,7 @@ public class SecurityConfig {
                         .requestMatchers("/auth/**").permitAll() // Cho phép login/signup
                         .requestMatchers("/vnpay/return/**").permitAll() // Cho phép login/signup
                         .anyRequest().authenticated() // Các request khác cần xác thực (JWT sau)
+                        
                 )
                 .csrf(csrf -> csrf.disable()) // Tắt CSRF cho API REST
                 .cors(cors -> {
@@ -54,7 +55,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:3000"));
+        config.setAllowedOrigins(List.of("http://localhost:3003"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true); // Cho phép gửi token/cookie
