@@ -49,8 +49,8 @@ public class NotificationController {
             return ResponseEntity.badRequest().body(result);
         }
         return ResponseEntity.ok(result);
-        
     }
+    
     @GetMapping("/types")
     public ResponseEntity<List<String>> getNotificationTypes() {
         List<String> types = new ArrayList<>();

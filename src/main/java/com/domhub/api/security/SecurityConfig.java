@@ -39,6 +39,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/auth/**").permitAll() // Cho phép login/signup
                         .requestMatchers("/vnpay/return/**").permitAll() // Cho phép login/signup
+                        .requestMatchers("/notifications/create").hasRole("ADMIN")
                         .anyRequest().authenticated() // Các request khác cần xác thực (JWT sau)
                         
                 )
