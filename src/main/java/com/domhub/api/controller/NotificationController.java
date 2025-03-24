@@ -29,8 +29,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class NotificationController {
 
-    private final AccountRepository accountRepository;
-
     private final NotificationService notificationService;
 
 
@@ -62,14 +60,7 @@ public class NotificationController {
 
     @GetMapping("/{id}")
     public NotificationDTO getNotificationById(@PathVariable Integer id) {
-        Notification notification=notificationService.getNotificationById(id);
-        Account account = accountRepository.getById(notification.getCreatedBy());
-        return new NotificationDTO(
-            notification.getTitle(),
-            notification.getContent(),
-            notification.getCreatedDate(),
-            account.getUserName()
-        );
+        return notificationService.getNotificationById(id);
     }
     
     @GetMapping("/type/{type}")

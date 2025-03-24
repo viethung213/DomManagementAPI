@@ -1,9 +1,14 @@
 package com.domhub.api.service;
 
+import com.domhub.api.model.Account;
 import com.domhub.api.model.Notification;
 import com.domhub.api.model.Notification.NotificationType;
 import com.domhub.api.dto.request.NotificationRequest;
+import com.domhub.api.dto.response.NotificationDTO;
+import com.domhub.api.repository.AccountRepository;
 import com.domhub.api.repository.NotificationRepository;
+
+import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
 
@@ -12,13 +17,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class NotificationService {
 
     private final NotificationRepository notificationRepository;
-
-    public NotificationService(NotificationRepository notificationRepository) {
-        this.notificationRepository = notificationRepository;
-    }
+    private final AccountRepository accountRepository;
 
     public List<Notification> getAllNotifications() {
         return notificationRepository.findAll();
@@ -46,9 +49,18 @@ public class NotificationService {
         }
     }
     
-    public Notification getNotificationById(Integer id) {
-        Optional<Notification> notification = notificationRepository.findById(id);
-        return notification.orElse(null);
+    public NotificationDTO getNotificationById(Integer id) {
+        Notification notification = notificationRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Notification not found")); // Xử lý khi không tìm thấy
+
+Account account = accountRepository.findById(notification.getCreatedBy())
+        .orElseThrow(() -> new RuntimeException("Account not found"));
+        return new NotificationDTO(
+            notification.getTitle(),
+            notification.getContent(),
+            notification.getCreatedDate(),
+            account.getUserName()
+        );
     }
     
     public List<Notification> getNotificationsByType(NotificationType type) {
