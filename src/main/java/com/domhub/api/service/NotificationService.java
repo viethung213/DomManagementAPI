@@ -21,7 +21,7 @@ import java.util.List;
 public class NotificationService {
 
     private final NotificationRepository notificationRepository;
-    // private final AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
 
     public List<Notification> getAllNotifications() {
         return notificationRepository.findAll();
@@ -49,18 +49,18 @@ public class NotificationService {
         }
     }
     
-    // public NotificationDTO getNotificationById(Integer id) {
-    //     Notification notification = notificationRepository.findById(id)
-    //     .orElseThrow(() -> new RuntimeException("Notification not found")); 
-    //     Account account = accountRepository.findById(notification.getCreatedBy())
-    //     .orElseThrow(() -> new RuntimeException("Account not found"));
-    //     return new NotificationDTO(
-    //         notification.getTitle(),
-    //         notification.getContent(),
-    //         notification.getCreatedDate(),
-    //         account.getUserName()
-    //     );
-    // }
+    public NotificationDTO getNotificationById(Integer id) {
+        Notification notification = notificationRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Notification not found")); 
+        Account account = accountRepository.findById(notification.getCreatedBy())
+        .orElseThrow(() -> new RuntimeException("Account not found"));
+        return new NotificationDTO(
+            notification.getTitle(),
+            notification.getContent(),
+            notification.getCreatedDate(),
+            account.getUserName()
+        );
+    }
     
     public List<Notification> getNotificationsByType(NotificationType type) {
         return notificationRepository.findByType(type);

@@ -8,5 +8,5 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface NotificationRepository extends JpaRepository<Notification, Integer> {
-     List<Notification> findByType(NotificationType type);
+    List<Notification> findByType(NotificationType type);
 }
