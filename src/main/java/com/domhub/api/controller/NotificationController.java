@@ -2,26 +2,24 @@ package com.domhub.api.controller;
 
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.http.HttpStatus;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
-import com.domhub.api.model.Account;
+
 import com.domhub.api.model.Notification;
 import com.domhub.api.model.Notification.NotificationType;
-import com.domhub.api.repository.AccountRepository;
 import com.domhub.api.dto.request.NotificationRequest;
 import com.domhub.api.dto.response.NotificationDTO;
-import com.domhub.api.service.AccountService;
+
 import com.domhub.api.service.NotificationService;
 
-import io.jsonwebtoken.lang.Arrays;
+
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 
 @RestController
@@ -62,7 +60,7 @@ public class NotificationController {
     public NotificationDTO getNotificationById(@PathVariable Integer id) {
         return notificationService.getNotificationById(id);
     }
-    
+            
     @GetMapping("/type/{type}")
     public List<Notification> getNotifications(@PathVariable String type) {
         NotificationType notificationType = NotificationType.valueOf(type);

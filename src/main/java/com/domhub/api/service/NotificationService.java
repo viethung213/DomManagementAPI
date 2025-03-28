@@ -2,6 +2,7 @@ package com.domhub.api.service;
 
 import com.domhub.api.model.Account;
 import com.domhub.api.model.Notification;
+import com.domhub.api.model.Staff;
 import com.domhub.api.model.Notification.NotificationType;
 import com.domhub.api.dto.request.NotificationRequest;
 import com.domhub.api.dto.response.NotificationDTO;
@@ -21,7 +22,7 @@ import java.util.List;
 public class NotificationService {
 
     private final NotificationRepository notificationRepository;
-    private final AccountRepository accountRepository;
+    private final StaffService staffService;
 
     public List<Notification> getAllNotifications() {
         return notificationRepository.findAll();
@@ -51,16 +52,21 @@ public class NotificationService {
     
     public NotificationDTO getNotificationById(Integer id) {
         Notification notification = notificationRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("Notification not found")); 
-        Account account = accountRepository.findById(notification.getCreatedBy())
-        .orElseThrow(() -> new RuntimeException("Account not found"));
+            .orElseThrow(() -> new RuntimeException("Notification not found with ID: " + id));
+    
+        Staff staff = staffService.getOneStaffByAccountId(notification.getCreatedBy())
+            .orElseThrow(() -> new RuntimeException("Staff not found with Account ID: " + notification.getCreatedBy()));
+    
+        String fullName = staff.getFirstName() + " " + staff.getLastName();
+    
         return new NotificationDTO(
             notification.getTitle(),
             notification.getContent(),
             notification.getCreatedDate(),
-            account.getUserName()
+            fullName
         );
     }
+    
     
     public List<Notification> getNotificationsByType(NotificationType type) {
         return notificationRepository.findByType(type);
