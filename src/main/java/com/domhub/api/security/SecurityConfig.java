@@ -41,7 +41,6 @@ public class SecurityConfig {
                         .requestMatchers("/vnpay/return/**").permitAll() // Cho phép login/signup
                         .requestMatchers("/staffs/findAll").permitAll()
                         .requestMatchers("/notifications/create").hasRole("ADMIN")
-                        .requestMatchers("/staffs/findAll").permitAll()
                         .anyRequest().permitAll()//.authenticated() // Các request khác cần xác thực (JWT sau)
                         
                 )
@@ -58,7 +57,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:3000"));
+        config.setAllowedOrigins(List.of("http://localhost:3001"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true); // Cho phép gửi token/cookie

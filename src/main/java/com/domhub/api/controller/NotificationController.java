@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-
 import com.domhub.api.model.Notification;
 import com.domhub.api.model.Notification.NotificationType;
 import com.domhub.api.dto.request.NotificationRequest;

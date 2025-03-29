@@ -1,17 +1,13 @@
 package com.domhub.api.service;
 
-import com.domhub.api.model.Account;
 import com.domhub.api.model.Notification;
 import com.domhub.api.model.Staff;
 import com.domhub.api.model.Notification.NotificationType;
 import com.domhub.api.dto.request.NotificationRequest;
 import com.domhub.api.dto.response.NotificationDTO;
-import com.domhub.api.repository.AccountRepository;
 import com.domhub.api.repository.NotificationRepository;
-
 import lombok.RequiredArgsConstructor;
 
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 

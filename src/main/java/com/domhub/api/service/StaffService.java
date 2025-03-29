@@ -13,8 +13,7 @@ import java.util.Optional;
 
 @Service
 public class StaffService {
-     private static final Logger logger = LoggerFactory.getLogger(StaffService.class);
-
+    private static final Logger logger = LoggerFactory.getLogger(StaffService.class);
     private final StaffRepository staffRepository;
 
     public StaffService(StaffRepository staffRepository) {
@@ -22,12 +21,11 @@ public class StaffService {
     }
 
     public List<Staff> getAllStaff() {
-        logger.info("Gọi getAllStaff()");
+        logger.info("Fetching all staff records");
         return staffRepository.findAll();
     }
 
     public Optional<Staff> getOneStaffByAccountId(Integer accountId) {
-        logger.info("Gọi getOneStaffByAccountId() với accountId = {}", accountId);
         return staffRepository.findByAccountId(accountId);
     }
 }
